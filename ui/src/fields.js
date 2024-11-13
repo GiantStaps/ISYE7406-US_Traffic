@@ -1,0 +1,17 @@
+export const fields = [
+    { name: "Severity", label: "Severity", type: "number" },
+    { name: "Distance(mi)", label: "Distance (mi)", type: "number" },
+    { name: "Temperature(F)", label: "Temperature (F)", type: "number" },
+    { name: "Wind_Chill(F)", label: "Wind Chill (F)", type: "number" },
+    { name: "Humidity(%)", label: "Humidity (%)", type: "number" },
+    { name: "Pressure(in)", label: "Pressure (in)", type: "number" },
+    { name: "Visibility(mi)", label: "Visibility (mi)", type: "number" },
+    { name: "Wind_Speed(mph)", label: "Wind Speed (mph)", type: "number" },
+    { name: "Precipitation(in)", label: "Precipitation (in)", type: "number" },
+    { name: "Sunrise_Sunset", label: "Sunrise/Sunset (0 = Sunrise, 1 = Sunset)", type: "number" },
+    { name: "Day_Night", label: "Day/Night (0 = Day, 1 = Night)", type: "number" },
+    { name: "month", label: "Month", type: "number" },
+    { name: "year", label: "Year", type: "number" },
+    { name: "day_of_week", label: "Day of Week", type: "number" },
+    { name: "zipcode_population", label: "Zipcode Population", type: "number" },
+];

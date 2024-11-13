@@ -4,3 +4,4 @@
 # Ignore all CSV files
 *.csv
 
+.data/
