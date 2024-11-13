@@ -12,6 +12,9 @@ class DurationPredictor:
         self.category_info = joblib.load(category_info_path)
 
     def create_dataframe(self, data):
+
+        # Ensure all values are in list format
+        data = {k: [v] if not isinstance(v, list) else v for k, v in data.items()}
         # Create DataFrame from input data
         df = pd.DataFrame(data)
         

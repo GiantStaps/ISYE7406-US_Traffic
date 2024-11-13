@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.form-field label {
+  width: 150px; /* Set a fixed width for labels to align inputs */
+  margin-right: 1em;
+  text-align: right;
+}
+
+.form-field input {
+  flex: 1;
+  padding: 0.5em;
+}
