@@ -1,6 +1,7 @@
 import pandas as pd
 import joblib
 import numpy as np
+import sys
 
 class DurationPredictor:
     def __init__(self, model_path, scaler_path, feature_columns_path, category_info_path):
@@ -25,27 +26,27 @@ class DurationPredictor:
         
         # make sure all columns are present
         df = df.reindex(columns=self.feature_columns, fill_value=0)
-        
+
         return df.astype('float32').to_numpy()
 
-    def predict_severity(self, data):
+    def predict_duration(self, data):
         # Create processed data array
         processed_data = self.create_dataframe(data)
         
         # Scale data using the pre-fitted scaler
         scaled_data = self.scaler.transform(processed_data)
         
-        # Predict severity using the pre-trained model
+        # Predict duration using the pre-trained model
         prediction = self.model.predict(scaled_data)
         return prediction
 
 # Example usage:
 if __name__ == "__main__":
     # Define file paths for model, scaler, and metadata
-    model_path = './linear_svr.joblib'
-    scaler_path = './standard_scalar.joblib'
-    feature_columns_path = './data_colnames.joblib'
-    category_info_path = './categorical_vars_info.joblib'
+    model_path = '../model/linear_svr.joblib'
+    scaler_path = '../model/standard_scalar.joblib'
+    feature_columns_path = '../model/data_colnames.joblib'
+    category_info_path = '../model/categorical_vars_info.joblib'
 
     # Initialize the predictor
     predictor = DurationPredictor(model_path, scaler_path, feature_columns_path, category_info_path)
@@ -70,5 +71,5 @@ if __name__ == "__main__":
     }
 
     # Get prediction
-    prediction = predictor.predict_severity(input_data)
-    print("Predicted Severity:", prediction)
+    prediction = predictor.predict_duration(input_data)
+    print(f"Predicted Accident Duration: {prediction} mins")

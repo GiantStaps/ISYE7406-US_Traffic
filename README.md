@@ -1,20 +1,21 @@
 # ISYE7406-US_Traffic
-## Setup
+## Environment Setup
 `poetry install`
 
-Warning: this will install 10GB of CUDA related packages if you don't have them already.
+Warning: this env is for GPU training and will install 10GB of CUDA related packages if you don't have them already.
+Another env will be released for only running the pre-trained model on the app.
 
-## Data Preping & Cleaning
-`preprocessing.ipynb`
+`cd ui && npm install` to install dependencies for the frontend
 
-## Model Training
-if you have have CUDA toolkit installed:
+## Run App
 
-`train_svm.ipynb`
+### Flask
 
-if you don't have a GPU accessible:
+`flask run --port=5001`   # Starts the Flask app on port 5001
 
-`train_per_zipcode.ipynb`
+### React
+`cd ui && npm start` to start an instance in your browser
 
-## Read about Why We Drop Zipcode
-Checkout `geolocation_experiement` branch. 
+## Look up all the data processing & training
+Go to folder *experiment*.
+
