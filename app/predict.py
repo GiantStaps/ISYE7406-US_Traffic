@@ -1,7 +1,6 @@
 import pandas as pd
 import joblib
 import numpy as np
-import sys
 
 class DurationPredicator:
     def __init__(self, model_path, scaler_path, feature_columns_path, category_info_path):
@@ -13,24 +12,32 @@ class DurationPredicator:
 
     def create_dataframe(self, data):
 
+        # print("Input data received:", data) # Uncomment to see input data
         # Ensure all values are in list format
         data = {k: [v] if not isinstance(v, list) else v for k, v in data.items()}
-        # Create DataFrame from input data
         df = pd.DataFrame(data)
         
         # Convert categorical columns to categorical types with specified categories
         categorical_columns = ['Severity', 'month', 'year', 'day_of_week', 'Sunrise_Sunset']
         for col in categorical_columns:
             if col in data:
-                df[col] = pd.Categorical(df[col], categories=self.category_info[col])
+                if col in self.category_info:
+                    df[col] = pd.Categorical(df[col], categories=self.category_info[col])
+                else:
+                    raise ValueError(f"Column {col} not found in category_info")
         
         # One-hot encode categorical columns and drop the first column to avoid multicollinearity
         df = pd.get_dummies(df, columns=['Severity', 'month', 'day_of_week', 'Sunrise_Sunset'], drop_first=True)
         
-        # make sure all columns are present
+        # Ensure all feature columns are present, filling missing ones with 0
         df = df.reindex(columns=self.feature_columns, fill_value=0)
-
-        return df.astype('float32').to_numpy()
+        
+        # Convert the DataFrame to a numpy array and check for NaN values
+        processed_array = df.astype('float32').to_numpy()
+        if np.isnan(processed_array).any():
+            raise ValueError("NaN values found in processed data")
+        
+        return processed_array
 
     def predict_duration(self, data):
         # Create processed data array
@@ -39,8 +46,17 @@ class DurationPredicator:
         # Scale data using the pre-fitted scaler
         scaled_data = self.scaler.transform(processed_data)
         
+        # Check for NaN values after scaling
+        if np.isnan(scaled_data).any():
+            raise ValueError("NaN values found in scaled data")
+
         # Predict duration using the pre-trained model
         prediction = self.model.predict(scaled_data)
+        
+        # Check for NaN values in prediction
+        if np.isnan(prediction).any():
+            raise ValueError("Model prediction returned NaN values")
+
         return prediction
 
 # Example usage:
