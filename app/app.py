@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
-from predict import DurationPredictor  # Assuming your class is saved in duration_predictor.py
+from predict import DurationPredicator  # Assuming your class is saved in duration_predicator.py
 
 # Define file paths for model, scaler, and metadata
 model_path = '../model/linear_svr.joblib'
@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Initialize the predictor
-predictor = DurationPredictor(model_path, scaler_path, feature_columns_path, category_info_path)
+predictor = DurationPredicator(model_path, scaler_path, feature_columns_path, category_info_path)
 
 @app.route('/predict', methods=['POST'])
 def predict():

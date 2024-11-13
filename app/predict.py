@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import sys
 
-class DurationPredictor:
+class DurationPredicator:
     def __init__(self, model_path, scaler_path, feature_columns_path, category_info_path):
         # Load model, scaler, and metadata
         self.model = joblib.load(model_path)
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     category_info_path = '../model/categorical_vars_info.joblib'
 
     # Initialize the predictor
-    predictor = DurationPredictor(model_path, scaler_path, feature_columns_path, category_info_path)
+    predictor = DurationPredicator(model_path, scaler_path, feature_columns_path, category_info_path)
 
     # Define input data
     input_data = {
