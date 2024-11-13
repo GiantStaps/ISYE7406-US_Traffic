@@ -2,8 +2,7 @@
 ## Environment Setup
 `poetry install`
 
-Warning: this env is for GPU training and will install 10GB of CUDA related packages if you don't have them already.
-Another env will be released for only running the pre-trained model on the app.
+> Warning: this env is for GPU training and will install 10GB of CUDA related packages if you don't have them already. Another env will be released for only running the pre-trained model on the app.
 
 `cd ui && npm install` to install dependencies for the frontend
 
