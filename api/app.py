@@ -54,4 +54,4 @@ def home():
     return "Welcome to the Accident Duration Predictor API"
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(debug=True)
