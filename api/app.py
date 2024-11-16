@@ -2,12 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 from predict import DurationPredicator  # Assuming your class is saved in duration_predicator.py
+import os
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Define file paths for model, scaler, and metadata
-model_path = '../model/linear_svr.joblib'
-scaler_path = '../model/standard_scalar.joblib'
-feature_columns_path = '../model/data_colnames.joblib'
-category_info_path = '../model/categorical_vars_info.joblib'
+base_path = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(base_path, '../model/linear_svr.joblib')
+scaler_path = os.path.join(base_path, '../model/standard_scalar.joblib')
+feature_columns_path = os.path.join(base_path, '../model/data_colnames.joblib')
+category_info_path = os.path.join(base_path, '../model/categorical_vars_info.joblib')
 
 app = Flask(__name__)
 CORS(app)
@@ -52,6 +59,11 @@ def predict():
 @app.route('/')
 def home():
     return "Welcome to the Accident Duration Predictor API"
+
+# Add handler for Vercel
+def handler(event, context):
+    from flask_lambda import FlaskLambda
+    return FlaskLambda(app)(event, context)
 
 if __name__ == "__main__":
     app.run(debug=True)

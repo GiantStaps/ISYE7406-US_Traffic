@@ -675,6 +675,20 @@ files = [
 Flask = ">=0.9"
 
 [[package]]
+name = "flask-lambda"
+version = "0.0.4"
+description = "Python module to make Flask compatible with AWS Lambda for creating RESTful applications"
+optional = false
+python-versions = "*"
+files = [
+    {file = "flask-lambda-0.0.4.tar.gz", hash = "sha256:489fa54dc97b7fb7ddeaacd137544ad32c1a3399a5870046b31bef2e909d9fea"},
+    {file = "flask_lambda-0.0.4-py2.py3-none-any.whl", hash = "sha256:b2859140b936ac7380d29901d338adf0e5ce19a504aa12659e54f58c94774fc1"},
+]
+
+[package.dependencies]
+Flask = ">=0.10"
+
+[[package]]
 name = "fonttools"
 version = "4.54.1"
 description = "Tools to manipulate font files"
@@ -3043,4 +3057,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "6c62801d4a4dcd26e03cf9ce7950c4632a00e5449feffcf0f852154391ec6e75"
+content-hash = "7c028dfda7963a0a7557b38d591d8ff131f7a1bedfeb52309283b55bafb387de"

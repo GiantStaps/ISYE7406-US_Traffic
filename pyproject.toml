@@ -16,6 +16,7 @@ flask = "^3.1.0"
 pyspark = "^3.5.3"
 matplotlib = "^3.9.2"
 flask-cors = "^5.0.0"
+flask-lambda = "^0.0.4"
 
 
 [build-system]
