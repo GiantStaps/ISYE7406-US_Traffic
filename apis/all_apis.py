@@ -3,6 +3,11 @@ import requests, polyline
 import pandas as pd
 from datetime import datetime, timedelta
 import pytz 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 # This code does the following: 
 # 1. Google Directions API
@@ -34,7 +39,7 @@ def get_multiple_routes(origin, destination):
         "destination": destination,
         "alternatives": "true", 
         "mode": "driving",       
-        "key": "AIzaSyA36F88pOY2owrvo4qXc6RKMYIVs74BRdY"
+        "key": GOOGLE_MAPS_API_KEY
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:
@@ -262,13 +267,13 @@ print(f"Number of mapquest incidents: {mapquest_df.shape[0]}")
 print(f"Number of unique incidents: {unique_incidents_df.shape[0]}")
 
 # Export to Excel
-output_file = 'unique_traffic_incidents.xlsx'
-unique_incidents_df.to_excel(output_file, index=False)
+output_file = 'unique_traffic_incidents.csv'
+unique_incidents_df.to_csv(output_file, index=False)
 
 all_incidents = pd.DataFrame(mapquest_data.get('incidents', []))
 
 print(f"Total Incidents: {len(all_incidents)}")
 
-all_incidents.to_excel("all_incidents.xlsx", index=False)
+all_incidents.to_csv("all_incidents.csv", index=False)
 
 
